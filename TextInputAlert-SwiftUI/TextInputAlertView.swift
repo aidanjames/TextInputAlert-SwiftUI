@@ -13,6 +13,7 @@ struct TextInputAlertView: View {
     @Binding var showingModal: Bool
     @State private var scale: CGFloat = 0.1
     @State private var showingValidationError = false
+    @State private var answerText = ""
     
     var titleText = ""
     var placeholderText = ""
@@ -20,11 +21,7 @@ struct TextInputAlertView: View {
     var buttonText = "Ok"
     var action: (String) -> Void
     
-    
     @Environment(\.colorScheme) var colorScheme
-    
-    @State private var answerText = ""
-    var returnValue: String { return answerText}
     
     var body: some View {
         ZStack {
@@ -39,7 +36,6 @@ struct TextInputAlertView: View {
                         RoundedRectangle(cornerRadius: 6)
                             .stroke(showingValidationError ? Color.red : Color(UIColor.systemGray4), lineWidth: 1)
                 )
-//                    .textFieldStyle(RoundedBorderTextFieldStyle())
                     .font(.subheadline)
                     .padding(.horizontal, 30)
                     .padding(.bottom)
@@ -69,11 +65,11 @@ struct TextInputAlertView: View {
     }
     
     func returnTextFieldInput() {
-        guard !returnValue.isEmpty else {
+        guard !answerText.isEmpty else {
             showingValidationError = true
             return
         }
-        self.action(returnValue)
+        self.action(answerText)
         self.showingModal.toggle()
     }
 }

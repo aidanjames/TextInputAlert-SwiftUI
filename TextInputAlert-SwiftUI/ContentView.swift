@@ -18,10 +18,7 @@ struct ContentView: View {
         ZStack {
             VStack(spacing: 40) {
                 Text(myValue)
-                Button(action: {
-                    self.showingCustomAlert.toggle()
-//                    withAnimation(.easeOut) { self.showingCustomAlert.toggle() }
-                }){
+                Button(action: { self.showingCustomAlert.toggle() }){
                     Text("Show custom alert")
                 }
                 Button(action: { self.showingNormalAlert.toggle() }) {
