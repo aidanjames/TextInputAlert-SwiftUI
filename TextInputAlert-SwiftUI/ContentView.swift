@@ -25,11 +25,11 @@ struct ContentView: View {
                     Text("Show normal alert")
                 }
                 .alert(isPresented: $showingNormalAlert) {
-                    Alert(title: Text("This is the title"), message: Text("This is the body text."), dismissButton: .cancel())
+                    Alert(title: Text("Add player"), message: Text("Please enter a name for your new player. Don't be silly!"), dismissButton: .cancel())
                 }
             }
             if showingCustomAlert {
-                TextInputAlertView(showingModal: self.$showingCustomAlert, titleText: "My title", placeholderText: "Input a value please", bodyText: "What would you like to say?") { value in
+                TextInputAlertView(showingModal: self.$showingCustomAlert, titleText: "Add player", placeholderText: "Enter a name", bodyText: "Please enter a name for your new player. Don't be silly!") { value in
                     self.myValue = value
                 }
             }
