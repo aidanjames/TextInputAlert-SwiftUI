@@ -59,9 +59,9 @@ struct TextInputAlertView: View {
                     }
                 }.frame(height: 50)
             }
-        .frame(maxWidth: 400)
             .background(colorScheme == .light ?  Color.white : Color.black)
             .clipShape(RoundedRectangle(cornerRadius: 15))
+                .frame(maxWidth: 400, minHeight: 50, maxHeight: 500)
             .scaleEffect(scale)
             .padding(50)
             .onAppear {
@@ -86,7 +86,7 @@ struct TextInputAlertView: View {
 
 struct TextInputAlertView_Previews: PreviewProvider {
     static var previews: some View {
-        TextInputAlertView(showingModal: .constant(true), titleText: "Title", placeholderText: "Enter a type of food. Don't do it", bodyText: "Do you like to eat food? Of course you do. Who on earth doesn't like food?", action: { _ in })
+        TextInputAlertView(showingModal: .constant(true), titleText: "Title", placeholderText: "Enter a type of food. Don't do it", bodyText: "Do you like to eat food? Of course you do. Who on earth doesn't like food? ", action: { _ in })
             .previewLayout(.sizeThatFits)
     }
 }

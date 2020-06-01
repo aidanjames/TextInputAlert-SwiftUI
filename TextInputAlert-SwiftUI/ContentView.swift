@@ -15,24 +15,27 @@ struct ContentView: View {
     @State private var showingNormalAlert = false
     
     var body: some View {
-        ZStack {
-            VStack(spacing: 40) {
-                Text(myValue)
-                Button(action: { self.showingCustomAlert.toggle() }){
-                    Text("Show custom alert")
+        NavigationView {
+            ZStack {
+                VStack(spacing: 40) {
+                    Button(action: { self.showingCustomAlert.toggle() } ) {
+                        Text("Show custom alert")
+                    }
+                    Button(action: { self.showingNormalAlert.toggle() } ) {
+                        Text("Show normal alert")
+                    }
+                    .alert(isPresented: $showingNormalAlert) {
+                        Alert(title: Text("Add player"), message: Text("Select 'Show custom alert' to add a player."), dismissButton: .cancel())
+                    }
+                    Button("Clear title") { self.myValue = "" }.foregroundColor(.red)
                 }
-                Button(action: { self.showingNormalAlert.toggle() }) {
-                    Text("Show normal alert")
-                }
-                .alert(isPresented: $showingNormalAlert) {
-                    Alert(title: Text("Add player"), message: Text("Please enter a name for your new player. Don't be silly!"), dismissButton: .cancel())
+                if showingCustomAlert {
+                    TextInputAlertView(showingModal: self.$showingCustomAlert, titleText: "Add player", placeholderText: "Enter a name", bodyText: "Add a name for your player.") { value in
+                        self.myValue = value
+                    }
                 }
             }
-            if showingCustomAlert {
-                TextInputAlertView(showingModal: self.$showingCustomAlert, titleText: "Add player", placeholderText: "Enter a name", bodyText: "Please enter a name for your new player. Don't be silly!") { value in
-                    self.myValue = value
-                }
-            }
+            .navigationBarTitle("\(myValue.isEmpty ? "This will change" : myValue)")
         }
     }
     
